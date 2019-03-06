@@ -85,6 +85,27 @@ namespace Teste_2___Contador_de_Moleculas
                     return posicao; //Se encontrar retorna a posição onde o item está
             return -1;  //caso não encontre, retorna -1 (flag)
         }
+        static void contabilizarElementosRecursivo(string equacaoQuimica, int indiceMultiplica, List<Formula> listaElementos)
+        {
+            /*
+             * Grupos: 1 e 2 - Elemento quimico com a sua quantidade
+             * Grupos: 3 e 4 - Elementos que estão dentro de parenteses, chaves ou colchetes
+             */
+            Regex regex = new Regex(@"(?<1>[A-Z][a-z]?)(?<2>\d*)|\{(?<3>.*?)\}(?<4>\d*)|\[(?<3>.*?)\](?<4>\d*)|\((?<3>.*?)\)(?<4>\d*)?");
+            foreach (Match item in regex.Matches(equacaoQuimica))
+            {
+                if (item.Groups[3].Success) //repete com a string capturada
+                    if (item.Groups[4].Value.Length == 0)
+                        contabilizarElementosRecursivo(item.Groups[3].Value, indiceMultiplica, listaElementos);
+                    else
+                        contabilizarElementosRecursivo(item.Groups[3].Value, Convert.ToInt32(item.Groups[4].Value) * indiceMultiplica, listaElementos);
+                else //Base
+                    if (item.Groups[2].Value.Length == 0)
+                    listaElementos[pesquisaElemento(item.Groups[1].Value, listaElementos)].Quantidade += 1 * indiceMultiplica;
+                else
+                    listaElementos[pesquisaElemento(item.Groups[1].Value, listaElementos)].Quantidade += Convert.ToInt32(item.Groups[2].Value) * indiceMultiplica;
+            }
+        }
         
         #region Arquivos
         static void gerarArquivos(List<Formula> teste, int indice)
