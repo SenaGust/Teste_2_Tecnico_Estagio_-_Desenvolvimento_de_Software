@@ -51,7 +51,12 @@ namespace Teste_2___Contador_de_Moleculas
     {
         static void Main(string[] args)
         {
+            leituraArquivos();
+            processar();
 
+            //Fim
+            Console.WriteLine("Pressione qualquer tecla para continuar...");
+            Console.ReadKey();
         }
 
         static void processar()
