@@ -55,14 +55,15 @@ namespace Teste_2___Contador_de_Moleculas
             processar();
 
             //Fim
-            Console.WriteLine("Pressione qualquer tecla para continuar...");
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
             Console.ReadKey();
         }
 
         static void processar()
         {
             //Faz o processamento dos dados, equação por equação e salva em um arquivo
-            for (int pos = 0; pos < Controle.todasFormulas.Count; pos++)
+            int pos;
+            for (pos = 0; pos < Controle.todasFormulas.Count; pos++)
             {
                 Regex regex;
                 List<Formula> EquacaoQuimica = new List<Formula>();
@@ -88,12 +89,13 @@ namespace Teste_2___Contador_de_Moleculas
 
                 gerarArquivos(EquacaoQuimica, pos + 1);
             }
+            Console.WriteLine("Foram Criados {0} arquivos.", pos);
         }
         static int pesquisaElemento(string Elemento, List<Formula> ondeProcurar)
         {
             for (int posicao = 0; posicao < ondeProcurar.Count; posicao++)
                 if (ondeProcurar[posicao].ElementoQuimico == Elemento)
-                    return posicao; //Se encontrar retorna a posição onde o item está
+                    return posicao; //Se encontrar o elemento, retorna a posição onde o item está
             return -1;  //caso não encontre, retorna -1 (flag)
         }
         static void contabilizarElementosRecursivo(string equacaoQuimica, int indiceMultiplica, List<Formula> listaElementos)
