@@ -41,6 +41,10 @@ namespace Teste_2___Contador_de_Moleculas
         }
         #endregion
     }
+    class Controle
+    {
+        public static List<string> todasFormulas = new List<string>();
+    }
     class Program
     {
         static void Main(string[] args)
