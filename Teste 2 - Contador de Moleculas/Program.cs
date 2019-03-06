@@ -64,7 +64,16 @@ namespace Teste_2___Contador_de_Moleculas
             //Faz o processamento dos dados, equação por equação e salva em um arquivo
             for (int pos = 0; pos < Controle.todasFormulas.Count; pos++)
             {
+                Regex regex;
                 List<Formula> EquacaoQuimica = new List<Formula>();
+
+                regex = new Regex(@"([A-Z][a-z]?)");
+                foreach (Match item in regex.Matches(Controle.todasFormulas[pos]))
+                    if (pesquisaElemento(item.Groups[1].Value, EquacaoQuimica) == -1)
+                        EquacaoQuimica.Add(new Formula(item.Groups[1].Value)); //se não foi criado, criar. Se não existe, não é necessário criar outro objeto
+
+                //contabilizar os elementos
+                contabilizarElementosRecursivo(Controle.todasFormulas[pos], 1, EquacaoQuimica);
 
                 #region Facilitando testes
                 Console.WriteLine("Arquivo: " + (pos + 1));
@@ -76,6 +85,8 @@ namespace Teste_2___Contador_de_Moleculas
                 Console.WriteLine();
                 Console.WriteLine();
                 #endregion
+
+                gerarArquivos(EquacaoQuimica, pos + 1);
             }
         }
         static int pesquisaElemento(string Elemento, List<Formula> ondeProcurar)
