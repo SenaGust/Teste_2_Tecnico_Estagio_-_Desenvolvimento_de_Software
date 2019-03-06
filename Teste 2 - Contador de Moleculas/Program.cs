@@ -78,7 +78,14 @@ namespace Teste_2___Contador_de_Moleculas
                 #endregion
             }
         }
-
+        static int pesquisaElemento(string Elemento, List<Formula> ondeProcurar)
+        {
+            for (int posicao = 0; posicao < ondeProcurar.Count; posicao++)
+                if (ondeProcurar[posicao].ElementoQuimico == Elemento)
+                    return posicao; //Se encontrar retorna a posição onde o item está
+            return -1;  //caso não encontre, retorna -1 (flag)
+        }
+        
         #region Arquivos
         static void gerarArquivos(List<Formula> teste, int indice)
         {
