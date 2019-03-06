@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Teste_2___Contador_de_Moleculas
@@ -51,6 +52,26 @@ namespace Teste_2___Contador_de_Moleculas
         static void Main(string[] args)
         {
 
+        }
+
+        static void processar()
+        {
+            //Faz o processamento dos dados, equação por equação e salva em um arquivo
+            for (int pos = 0; pos < Controle.todasFormulas.Count; pos++)
+            {
+                List<Formula> EquacaoQuimica = new List<Formula>();
+
+                #region Facilitando testes
+                Console.WriteLine("Arquivo: " + (pos + 1));
+                Console.WriteLine(Controle.todasFormulas[pos]);
+                for (int posicao = 0; posicao < EquacaoQuimica.Count; posicao++)
+                {
+                    Console.Write(EquacaoQuimica[posicao].ToString() + " ");
+                }
+                Console.WriteLine();
+                Console.WriteLine();
+                #endregion
+            }
         }
 
         #region Arquivos
